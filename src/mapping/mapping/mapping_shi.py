@@ -57,14 +57,7 @@ class GeneratedMap: #generated  by bots, shared by all of them
           if self.grid[(x,y)] == 0:
             for nx, ny in self.neighbors(x, y):
                 if self.grid[(nx, ny)] == 3:  # unexplored neighbor
-                    self.Frontier.add((nx, ny))
-    def update_frontiers(self,list_of_points):
-        for point in list_of_points:
-            if point in self.Frontier:
-                self.Frontier.remove(point)
-            for nx, ny in self.neighbors(point[0], point[1]):
-                if self.grid[(nx, ny)] == 3:  # unexplored neighbor
-                    self.Frontier.add((nx, ny))
+                    self.Frontier.add((x, y))
 
     def printmap(self):
         # render the known explored region __ is so python treats it as a special function and prints a string when we code print(str)

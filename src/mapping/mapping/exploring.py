@@ -25,8 +25,8 @@ class Swarm(Node):
         plt.clf()
         plt.imshow(self.data, vmin = 0, vmax = 3)                     
         plt.colorbar()                       
-        plt.draw()    
-        plt.pause(0.1)
+        plt.draw() 
+        plt.pause(0.000001)
     def update_data(self):
         for (x,y), value in self.map.grid.items():
             self.data[x][y] = value
@@ -34,12 +34,12 @@ class Swarm(Node):
         for b in self.bots:
             b.see()
     
-    def cost(self, coord1: tuple, coord2: tuple): #I used coord1 as bots current location in the later code, pls confirm
+    def cost(self, coord1: tuple, coord2: tuple,x:int): #I used coord1 as bots current location in the later code, pls confirm
 
         #coord1, coord2, and frontier points are tuples (x, y)
 
 
-        direct_distance = len(self.pathplanner.van(coord1, coord2))
+        direct_distance = len(self.pathplanner.van(coord1, coord2,x))
         """""
         approached_count = 0
         increased_count = 0
@@ -71,17 +71,13 @@ class Swarm(Node):
         self.get_logger().info("chosing frontier")
         self.get_logger().info(str(len(self.map.Frontier)))
         costs = {}
+        cost = (0,0,10**18)
         for (x,y) in self.map.Frontier:
-          costs[(x,y)] = self.cost(self.bots[i].coord, (x,y))
-
-        best_coord = None
-        min_cost = float('inf')  #really large number
-
-        for coord, cost in costs.items():
-          if cost < min_cost:
-              min_cost = cost
-              best_coord = coord
-
+          costs[(x,y)]= self.cost(self.bots[i].coord, (x,y),cost[2])
+          if costs[(x,y)]:
+              cost = (x,y,costs[(x,y)])
+        best_coord = (cost[0],cost[1])
+        self.get_logger().info(f"Best frontier chosen at {best_coord} with cost {cost[2]}")
         return best_coord
 
 
@@ -91,12 +87,9 @@ def main():
     swarm = Swarm()
     swarm.see()
     swarm.map.update_frontiers()
-    i = 1000
-    while i > 0:
+    while len(swarm.map.Frontier)>0:
         swarm.bots[0].follow_path(swarm.pathplanner.nav(swarm.bots[0].coord,swarm.chooseFrontier(0)))
-        i -= 1
         swarm.loadmap()
-    swarm.loadmap()
 
 if __name__ == '__main__':
     main()

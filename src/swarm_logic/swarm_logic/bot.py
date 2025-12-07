@@ -71,6 +71,7 @@ class bot(Node):
         self.parent.map.grid[self.coord]= 2
         self.parent.update_data()
         self.parent.map.update_frontiers()
+        self.parent.loadmap()
     def move(self,coord: tuple):
         if coord == (self.coord[0]+1,self.coord[1]) or (self.coord[0]-1,self.coord[1]) or (self.coord[0],self.coord[1]+1) or (self.coord[0],self.coord[1]-1):
             self.coord = coord

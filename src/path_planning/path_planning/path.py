@@ -54,7 +54,7 @@ class pathplanning(Node):
             paths = new_paths
             new_paths = []
         return path
-    def van(self,coord1:tuple,coord2:tuple):
+    def van(self,coord1:tuple,coord2:tuple,i:int):
         if coord2 == None:
             return []
         paths = [[coord1]]
@@ -86,6 +86,8 @@ class pathplanning(Node):
             if found:
                 break
             paths = new_paths
+            if len(paths[0])>=i:
+                return []
             new_paths = []
         return path
     

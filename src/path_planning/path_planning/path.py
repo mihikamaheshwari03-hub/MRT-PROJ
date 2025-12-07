@@ -7,7 +7,7 @@ from mapping.mapping_shi import GeneratedMap
 from messages.srv import Mapinfo
 from messages.msg import Map
 class pathplanning(Node): 
-    def __init__(self,map): #map is a dictionary with key (x,y) and value status, with 0 for clear 
+    def __init__(self,map): #map is a class with map.grid being a dictionary with key (x,y) and value status, with 0 for clear 
         self.map = map
         super().__init__("path_planning_node")
     

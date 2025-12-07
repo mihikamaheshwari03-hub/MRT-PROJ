@@ -45,8 +45,8 @@ class Swarm(Node):
         increased_count = 0
 
         for fp in self.map.Frontier:
-            dist1 = len(self.pathplanner.van(fp, coord1))
-            dist2 = len(self.pathplanner.van(fp, coord2))
+            dist1 = len(self.pathplanner.nav(fp, coord1))
+            dist2 = len(self.pathplanner.nav(fp, coord2))
 
             if dist2 < dist1:
                 approached_count += 1

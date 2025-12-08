@@ -134,6 +134,9 @@ class bot(Node):
         if coord == (self.coord[0]+1,self.coord[1]) or (self.coord[0]-1,self.coord[1]) or (self.coord[0],self.coord[1]+1) or (self.coord[0],self.coord[1]-1):
             self.coord = coord
             self.see()
+
+            if self.parent:            
+                self.parent.loadmap()
     def follow_path(self,path):
         for i in range(len(path)):
             self.move(path[i])

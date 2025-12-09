@@ -132,6 +132,7 @@ class bot(Node):
         self.parent.map.update_frontiers(self.id)
     
     def move(self,coord: tuple):
+        self.get_logger().info(f"Bot {self.id} moving from {self.coord} to {coord}")
         self.i += 1
         if coord == (self.coord[0]+1,self.coord[1]) or (self.coord[0]-1,self.coord[1]) or (self.coord[0],self.coord[1]+1) or (self.coord[0],self.coord[1]-1) or (coord==self.coord):
             self.coord = coord

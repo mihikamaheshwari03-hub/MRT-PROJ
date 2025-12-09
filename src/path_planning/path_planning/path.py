@@ -37,6 +37,8 @@ class pathplanning(Node):
             return neighbors
             
     def nav(self,start:tuple,end:tuple): ## elementary path finding algorithim for now please keep the input and output types same. 
+        if start == end:
+            return []
         """Returns a list of tuples as a path from the given start to the given end in the given maze"""
         # Create start and end node
         start_node = Point(None, start)

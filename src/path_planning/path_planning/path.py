@@ -24,7 +24,8 @@ class Point():
 
 class pathplanning(Node): 
     def __init__(self,map): #map is a class with map.grid being a dictionary with key (x,y) and value status, with 0 for clear 
-        self.map=map.grid
+        self.map=map
+        self.grid=map.grid
         super().__init__("path_planning_node")
 
     def get_neighbors(self,pos:tuple):
@@ -85,7 +86,7 @@ class pathplanning(Node):
                 node_position = (current_node.position[0] + new_position[0], current_node.position[1] + new_position[1])
 
                 # Make sure within range
-                if node_position[0] > (len(self.map) - 1) or node_position[0] < 0 or node_position[1] > (len(self.map[len(self.map)-1]) -1) or node_position[1] < 0:
+                if node_position[0] > (59) or node_position[0] < 0 or node_position[1] > (59) or node_position[1] < 0:
                     continue
 
                 # Make sure walkable terrain
